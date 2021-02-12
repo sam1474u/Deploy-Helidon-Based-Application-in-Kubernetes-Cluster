@@ -256,10 +256,15 @@ CREATE SEQUENCE EMPLOYEE_SEQ
  INCREMENT BY   1;  
 
 INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Hugh', 'Jast', 'Hugh.Jast@example.com', '730-555-0100', '1970-11-28', 'National Data Strategist', 'Mobility');
+
 INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Toy', 'Herzog', 'Toy.Herzog@example.com', '769-555-0102', '1961-08-08', 'Dynamic Operations Manager', 'Paradigm');
+
 INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Reed', 'Hahn', 'Reed.Hahn@example.com', '429-555-0153', '1977-02-05', 'Future Directives Facilitator', 'Quality');
+
 INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Novella', 'Bahringer', 'Novella.Bahringer@example.com', '293-596-3547', '1961-07-25', 'Principal Factors Architect', 'Division');
+
 INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Zora', 'Sawayn', 'Zora.Sawayn@example.com', '923-555-0161', '1978-03-18', 'Dynamic Marketing Designer', 'Security');
+
 INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Cordia', 'Willms', 'Cordia.Willms@example.com', '778-555-0187', '1989-03-31', 'Human Division Representative', 'Optimization');
 
 
@@ -318,8 +323,61 @@ INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, D
              
       Push the Docker image from the client machine to Oracle Cloud Infrastructure Registry.
       
-      docker push <target-tag>
+      		docker push <target-tag>
+		
+		
+8. Deploy the Application to Kubernetes
+
+    To enable Kubernetes to pull an image from Oracle Cloud Infrastructure Registry when deploying an application, you need to create a Kubernetes secret. 
+    In a terminal window, create a Docker registry secret. 
+
+	    kubectl create secret docker-registry ocirsecret
+	    --docker-server=<region-code>.ocir.io  --docker-username='<tenancy-name>/<oci-username>'
+	    --docker-password='<oci-auth-token>'  --docker-email='<email-address>'
+	    
+	    for example :
+	    kubectl create secret docker-registry ocirsecret --docker-server=bom.ocir.io
+	    --docker-username='bmdrgwy1wsjh/oracleidentitycloudservice/viveklal' --docker-
+	    password='BwDq+Njz-FM)fX[g-;)6' --docker-email='vivek.lal@oracle.com'
+	    
+    Open the employee-app/app.yaml file in a text editor and update image and imagePullSecrets.
     
+		kind: Deployment
+		apiVersion: extensions/v1beta1
+		metadata:
+		  name: employee-app
+		spec:
+		  replicas: 1
+		  template:
+		    metadata:
+		      labels:
+			app: employee-app
+			version: v1
+		    spec:
+		      containers:
+		      - name: employee-app
+			image: bom.ocir.io/bmdrgwy1wsjh/employee-repo/employee-ms-app:latest
+			imagePullPolicy: IfNotPresent
+			ports:
+			- containerPort: 8080
+		      imagePullSecrets:
+			- name: ocirsecret
+    
+    		
+    In the terminal window, go to the employee-app directory and deploy the application.
+    
+    		kubectl create -f app.yaml
+		
+     // image here
+     
+9.Test Your Application
+
+   In a command-line window, get the details of the employee-helidon-lb service and copy the address displayed in the EXTERNAL-IP field
+   
+  		 kubectl get service employee-helidon-lb
+		 
+   Test the service: http://<lb_ip_address>/employees/
+   Test the client: http://<lb_ip_address>/public/index.html
     
      
      
