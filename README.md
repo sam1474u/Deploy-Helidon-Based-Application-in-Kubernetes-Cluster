@@ -233,6 +233,112 @@ Pre-requisite :
   3. Connect to the Database with Oracle SQL Developer
   
   
+        ![image](https://user-images.githubusercontent.com/42166489/107749418-9203f700-6d40-11eb-9ce0-df652128569b.png)
+        
+        
+        
+  4. Load Sample Database Schema, and commit in your SQL developer.
+  
+        CREATE TABLE EMPLOYEE (
+      ID INTEGER NOT NULL,
+      FIRSTNAME VARCHAR(100),
+      LASTNAME VARCHAR(100),
+      EMAIL VARCHAR(100),
+      PHONE VARCHAR(100),
+      BIRTHDATE VARCHAR(10),
+      TITLE VARCHAR(100),
+      DEPARTMENT VARCHAR(100),
+      PRIMARY KEY (ID)
+	  ); 
+
+CREATE SEQUENCE EMPLOYEE_SEQ
+ START WITH     100
+ INCREMENT BY   1;  
+
+INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Hugh', 'Jast', 'Hugh.Jast@example.com', '730-555-0100', '1970-11-28', 'National Data Strategist', 'Mobility');
+INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Toy', 'Herzog', 'Toy.Herzog@example.com', '769-555-0102', '1961-08-08', 'Dynamic Operations Manager', 'Paradigm');
+INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Reed', 'Hahn', 'Reed.Hahn@example.com', '429-555-0153', '1977-02-05', 'Future Directives Facilitator', 'Quality');
+INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Novella', 'Bahringer', 'Novella.Bahringer@example.com', '293-596-3547', '1961-07-25', 'Principal Factors Architect', 'Division');
+INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Zora', 'Sawayn', 'Zora.Sawayn@example.com', '923-555-0161', '1978-03-18', 'Dynamic Marketing Designer', 'Security');
+INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Cordia', 'Willms', 'Cordia.Willms@example.com', '778-555-0187', '1989-03-31', 'Human Division Representative', 'Optimization');
+
+
+
+6. Deploy the Application to Oracle Cloud
+
+    To deploy your application to Oracle Cloud Infrastructure Container Engine for Kubernetes, you need to push your Docker image to Oracle Cloud Infrastructure Registry, 
+    then you can pull the Docker image from the registry to deploy it to the Kubernetes cluster. 
+    
+   1. Update the Application to Use the Database and Build the Docker Image
+   
+        Open the employee-app\src\main\resources\application.yaml file in a text editor.
+        Update the user, password, hosturl and drivertype properties with the value of your database credentials.
+
+            Example: 
+            user: sys as SYSDBA
+            password: your_password
+            hosturl: 10.x.x.x:1521/db1_phx1tv.sub11152053590.mycvn.oraclevcn.com
+            drivertype: Oracle
+            
+            See above picture for reference.
+            
+    2. In a terminal window, go to the employee-app project directory.
+    3. Package the application.
+                    
+                 mvn package
+    4. Build the Docker image.
+    
+             docker build -t employee-app .
+    
+7. Push the Docker Image to the Repository
+
+    Use the Docker CLI to push images to Oracle Cloud Infrastructure Registry. 
+    
+         docker login <region-key>.ocir.io
+         for example : docker login bom.ocir.io
+         
+    Enter your username in the format <tenancy_name>/<username> when you are a Federated user. example : bom.ocir.io/bmdrgwy1wsjh/oracleidentitycloudservice/viveklal
+        here 'bmdrgwy1wsjh' is OCIR and oracleidentitycloudservice is used as viveklal is a federated user.
+    Enter the authentication token you copied earlier from you Auth key.
+    Locate the image on the client machine that you want to push.
+    List the Docker images.
+                            
+                        docker images
+                        
+     // inser timage here
+     
+     Give a tag to the image that you're going to push to Oracle Cloud Infrastructure Registry.
+            
+                    docker tag <image-identifier> <target-tag>
+     
+             for example :  docker tag bom.ocir.io/bmdrgwy1wsjh/employee-repo/employee-ms-app:latest
+             
+             
+      Push the Docker image from the client machine to Oracle Cloud Infrastructure Registry.
+      
+      docker push <target-tag>
+    
+    
+     
+     
+     
+     
+     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+       
+  
   
   
   
