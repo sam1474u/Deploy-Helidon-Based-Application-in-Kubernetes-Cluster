@@ -96,7 +96,53 @@ Pre-requisite :
 
     The Employee application contains the deployment configuration (app.yaml) that is in the root directory of the application.
     
+    Before you get started, make sure Kubectl and Minikube are running in your local machine.
+    To get these please follow these commands :
+    
+    Install kubectl binary with curl on Linux(refernce url:https://kubernetes.io/docs/tasks/tools/install-kubectl/) - 
+        curl -LO https://dl.k8s.io/release/v1.20.0/bin/linux/amd64/kubectl
+        
+        sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+        kubectl version --client
+        
+    Install Minikube
+    
+        curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        sudo install minikube-linux-amd64 /usr/local/bin/minikube
+        
+        
+    Now, you can find app.yaml file in $home/helidon/examples/employee-app
+   
+   - In a terminal window, verify the connectivity to the cluster. 
+   
+            kubectl cluster-info
+            kubectl get nodes
             
+       // insert image here
+       
+    - Deploy the application to Kubernetes.
+    
+            kubetcl create -f app.yaml
+            
+     - Start the Kubernetes proxy server.
+     
+            kubectl proxy
+            
+     - Get the service information.
+            
+            kubectl get service employee-app
+            
+     - Test the application as before but use the NodePort instead of 8080.
+            For example, http://localhost:31435/public/index.html
+            
+            
+
+    
+    
+            
+    
+        
+        
     
     
     
