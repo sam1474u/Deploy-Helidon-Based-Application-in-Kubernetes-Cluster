@@ -82,6 +82,21 @@ Pre-requisite :
             docker run --rm -p 8080:8080 employee-app:latest
             
             
+     ![image](https://user-images.githubusercontent.com/42166489/107736058-23ff0600-6d27-11eb-808c-9b390b3a39eb.png)
+
+     ![image](https://user-images.githubusercontent.com/42166489/107736072-2b261400-6d27-11eb-8e32-c69c071e5214.png)
+
+    3. In the browser, go to http://localhost:8080/public/index.html.
+    4. Stop the Docker image.
+            
+         // upload image here
+         
+         
+3. Deploy the Application to Your Local Kubernetes Installation
+
+    The Employee application contains the deployment configuration (app.yaml) that is in the root directory of the application.
+    
+            
     
     
     
