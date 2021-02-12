@@ -368,7 +368,9 @@ INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, D
     
     		kubectl create -f app.yaml
 		
-     // image here
+     
+	![image](https://user-images.githubusercontent.com/42166489/107753219-cb8b3100-6d45-11eb-8787-8a3ac29a9842.png)
+
      
 9.Test Your Application
 
@@ -376,10 +378,12 @@ INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, D
    
   		 kubectl get service employee-helidon-lb
 		 
+		 
+   
+	![image](https://user-images.githubusercontent.com/42166489/107753845-a814b600-6d46-11eb-9f43-3c8ab355eb40.png)
+		 
    Test the service: http://<lb_ip_address>/employees/
    Test the client: http://<lb_ip_address>/public/index.html
-    
-     
      
      
      
