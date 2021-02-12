@@ -181,7 +181,7 @@ Pre-requisite :
       
  5. Configure the Database for the Application
  
-   1. Launch a DB System
+   Launch a DB System
    
       Use the Oracle Cloud Infrastructure console to launch a new DB System.
         
@@ -192,6 +192,7 @@ Pre-requisite :
         Click Launch DB System.
         
         In the Launch DB System dialog box, enter the following values:
+	
             DISPLAY NAME: MSDB
             AVAILABILITY DOMAIN: Select an availability domain.
             SHAMPE TYPE: VIRTUAL MACHINE
@@ -213,7 +214,7 @@ Pre-requisite :
         Click the MSDB database. 
         Click Nodes (1)
         
-  2. Create the Required Security Rules
+  Create the Required Security Rules
 
         Configure an Oracle Cloud Infrastructure rule that enable you to remotely access the database.
 
@@ -230,42 +231,43 @@ Pre-requisite :
                 DESTINATION PORT RANGE: 1521
           - Click Add Ingress Rules.
           
-  3. Connect to the Database with Oracle SQL Developer
+  Connect to the Database with Oracle SQL Developer
   
   
         ![image](https://user-images.githubusercontent.com/42166489/107749418-9203f700-6d40-11eb-9ce0-df652128569b.png)
         
         
         
-  4. Load Sample Database Schema, and commit in your SQL developer.
+  Load Sample Database Schema, and commit in your SQL developer.
   
-        CREATE TABLE EMPLOYEE (
-      ID INTEGER NOT NULL,
-      FIRSTNAME VARCHAR(100),
-      LASTNAME VARCHAR(100),
-      EMAIL VARCHAR(100),
-      PHONE VARCHAR(100),
-      BIRTHDATE VARCHAR(10),
-      TITLE VARCHAR(100),
-      DEPARTMENT VARCHAR(100),
-      PRIMARY KEY (ID)
-	  ); 
+			CREATE TABLE EMPLOYEE (
+		      ID INTEGER NOT NULL,
+		      FIRSTNAME VARCHAR(100),
+		      LASTNAME VARCHAR(100),
+		      EMAIL VARCHAR(100),
+		      PHONE VARCHAR(100),
+		      BIRTHDATE VARCHAR(10),
+		      TITLE VARCHAR(100),
+		      DEPARTMENT VARCHAR(100),
+		      PRIMARY KEY (ID)
+			  ); 
 
-CREATE SEQUENCE EMPLOYEE_SEQ
- START WITH     100
- INCREMENT BY   1;  
+			CREATE SEQUENCE EMPLOYEE_SEQ
+			 START WITH     100
+			 INCREMENT BY   1;  
 
-INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Hugh', 'Jast', 'Hugh.Jast@example.com', '730-555-0100', '1970-11-28', 'National Data Strategist', 'Mobility');
+	INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Hugh', 'Jast', 'Hugh.Jast@example.com', '730-555-0100', '1970-11-28', 'National Data Strategist', 'Mobility');
 
-INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Toy', 'Herzog', 'Toy.Herzog@example.com', '769-555-0102', '1961-08-08', 'Dynamic Operations Manager', 'Paradigm');
+	INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Toy', 'Herzog', 'Toy.Herzog@example.com', '769-555-0102', '1961-08-08', 'Dynamic Operations Manager', 'Paradigm');
 
-INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Reed', 'Hahn', 'Reed.Hahn@example.com', '429-555-0153', '1977-02-05', 'Future Directives Facilitator', 'Quality');
+	INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Reed', 'Hahn', 'Reed.Hahn@example.com', '429-555-0153', '1977-02-05', 'Future Directives Facilitator', 'Quality');
 
-INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Novella', 'Bahringer', 'Novella.Bahringer@example.com', '293-596-3547', '1961-07-25', 'Principal Factors Architect', 'Division');
+	INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Novella', 'Bahringer', 'Novella.Bahringer@example.com', '293-596-3547', '1961-07-25', 'Principal Factors Architect', 'Division');
 
-INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Zora', 'Sawayn', 'Zora.Sawayn@example.com', '923-555-0161', '1978-03-18', 'Dynamic Marketing Designer', 'Security');
+	INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Zora', 'Sawayn', 'Zora.Sawayn@example.com', '923-555-0161', '1978-03-18', 'Dynamic Marketing Designer', 'Security');
 
-INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Cordia', 'Willms', 'Cordia.Willms@example.com', '778-555-0187', '1989-03-31', 'Human Division Representative', 'Optimization');
+	INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, DEPARTMENT) VALUES (EMPLOYEE_SEQ.nextVal, 'Cordia', 'Willms', 'Cordia.Willms@example.com', '778-555-0187', '1989-03-31', 'Human Division Representative', 'Optimization');
+
 
 
 
@@ -383,6 +385,7 @@ INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, D
 	![image](https://user-images.githubusercontent.com/42166489/107753845-a814b600-6d46-11eb-9f43-3c8ab355eb40.png)
 		 
    Test the service: http://<lb_ip_address>/employees/
+   
    Test the client: http://<lb_ip_address>/public/index.html
      
      
