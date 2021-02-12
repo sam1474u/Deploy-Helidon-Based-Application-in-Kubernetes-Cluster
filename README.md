@@ -305,7 +305,9 @@ INSERT INTO EMPLOYEE (ID, FIRSTNAME, LASTNAME, EMAIL, PHONE, BIRTHDATE, TITLE, D
                             
                         docker images
                         
-     // inser timage here
+     
+	![image](https://user-images.githubusercontent.com/42166489/107751100-f32cca00-6d42-11eb-8662-66b52d1d61f4.png)
+
      
      Give a tag to the image that you're going to push to Oracle Cloud Infrastructure Registry.
             
