@@ -132,39 +132,123 @@ Pre-requisite :
             
             kubectl get service employee-app
             
+            
+       ![image](https://user-images.githubusercontent.com/42166489/107746809-71d23900-6d3c-11eb-94fb-4950960b8d78.png)
+       
+       ![image](https://user-images.githubusercontent.com/42166489/107746816-7696ed00-6d3c-11eb-9448-df4596ede25e.png)
+       
+       ![image](https://user-images.githubusercontent.com/42166489/107746820-7ac30a80-6d3c-11eb-8f82-121724de1cb2.png)
+            
      - Test the application as before but use the NodePort instead of 8080.
-            For example, http://localhost:31435/public/index.html
-            
-            
+            For example, http://localhost:31459/public/index.html
+   
+   
+4. Configure Your Kubernetes Cluster in Oracle Cloud
 
-    
-    
-            
-    
+      1. Create a Compartment
+              
+        - Sign in to the Oracle Cloud Infrastructure console.
+        - Open the navigation menu. Under Governance and Administration, go to Identity and click Compartments.
+        - Click Create Compartment.
+        - In the Create Compartment dialog box enter the following information:
+            NAME: MSCompartment(as per your choice)
+            DESCRIPTION: (Optional) Enter a description.
+            PARENT COMPARTMENT: Select a parent compartment.
+        - Click Create Compartment.
+     2. Create a Kubernetes Cluster  
+     
+        To create a Kubernetes cluster, you first specify basic details for the new cluster (the cluster name, and the Kubernetes version to install the master nodes).
+
+            - In the Oracle Cloud Infrastructure console, open the navigation menu. Under Solutions, Platform and Edge, go to Developer Services and click Container Clusters (OKE).
+            Select MSCompartment.
+            - On the cluster list page, click Create Cluster.
+            - In the Cluster Creation dialog, select and enter the following information:
+                NAME: MSDev
+                KUBERNETES VERSION: Select a Kubernetes version.
+                QUICK CREATE
+                SHAPE: VM.Standard2.1
+                QUANTITY PER SUBNET: 1
+            - Leave the remaining options unchanged and click Create.
+            - Write down the Virtual Cloud Network name and then click Close.
+
+    3. Download the Kubeconfig File
+
+        You need the kubeconfig file to access to the cluster when using Kubectl.
+
+            - After provisioning completes, click Access Kubeconfig.
+            - Follow the instructions displayed in the How to Access Kubeconfig dialog box.
+
+      
+ 5. Configure the Database for the Application
+ 
+   1. Launch a DB System
+   
+      Use the Oracle Cloud Infrastructure console to launch a new DB System.
         
         
-    
-    
-    
-    
-    
-    
+        In the Oracle Cloud Infrastructure console, open the navigation menu. Under Database, click Bare Metal, VM, and Exadata.
+        Select MSCompartment.
+        
+        Click Launch DB System.
+        
+        In the Launch DB System dialog box, enter the following values:
+            DISPLAY NAME: MSDB
+            AVAILABILITY DOMAIN: Select an availability domain.
+            SHAMPE TYPE: VIRTUAL MACHINE
+            SHAPE: VM.Standard2.1
+            ORACLE DATABASE SOFTWARE EDITION: Standard Edition
+            AVAILABLE STORAGE SIZE: 256
+            LICENSE TYPE: Choose the type of license you want to use for the DB system.
+            Choose SSH Key files (.pub) from your computer.
+            VIRTUAL CLOUD NETWORK: Select the same VCN as your Kubernetes cluster.
+            CLIENT SUBNET: Select a public subnet.
+            HOSTNAME PREFIX: emp
+            DATABASE NAME: employee
+            DATABASE VERSION: 12.2.0.1
+            DATABASE ADMIN PASSWORD: Your password
+            CONFIRM DATABASE ADMIN PASSWORD: Confirm your password
+
+      
+        Click Launch DB System. Provisioning the database can take several minutes.
+        Click the MSDB database. 
+        Click Nodes (1)
+        
+  2. Create the Required Security Rules
+
+        Configure an Oracle Cloud Infrastructure rule that enable you to remotely access the database.
+
+         - In the Oracle Cloud Infrastructure console, in the MSDB details page, click the Virtual Cloud Network.
+         - In the Virtual Cloud Network Details page, click Security Lists.
+         - Click the security list of the public subnets. The security list of the public subnets is the one that has lb in the name. 
+            For example, oke-lb-seclist-quick-MSDB-20190409213055
+         - In the Security List Details page, click Add All Rules, then click Another Ingress Rule.
+         - In the Add Ingress Rule dialog box, enter the following values:
+                STATELESS: Leave this option deselected
+                SOURCE TYPE: CIDR
+                SOURCE CIDR: 0.0.0.0/0
+                IP PROTOCOL: TCP
+                DESTINATION PORT RANGE: 1521
+          - Click Add Ingress Rules.
+          
+  3. Connect to the Database with Oracle SQL Developer
   
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
       
       
       
