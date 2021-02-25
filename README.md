@@ -389,6 +389,11 @@ Pre-requisite :
    Test the client: http://<lb_ip_address>/public/index.html
      
      
+     ![image](https://user-images.githubusercontent.com/42166489/109115799-93ccb200-7765-11eb-8c7b-944898a68eb2.png)
+
+     ![image](https://user-images.githubusercontent.com/42166489/109115876-ae069000-7765-11eb-9bf9-91759685c40e.png)
+
+     
      
      
     
