@@ -381,58 +381,13 @@ Pre-requisite :
   		 kubectl get service employee-helidon-lb
 		 
 		 
-   
-	![image](https://user-images.githubusercontent.com/42166489/107753845-a814b600-6d46-11eb-9f43-3c8ab355eb40.png)
+   ![image](https://user-images.githubusercontent.com/42166489/107753845-a814b600-6d46-11eb-9f43-3c8ab355eb40.png)
 		 
    Test the service: http://<lb_ip_address>/employees/
    
    Test the client: http://<lb_ip_address>/public/index.html
      
      
-     ![image](https://user-images.githubusercontent.com/42166489/109115799-93ccb200-7765-11eb-8c7b-944898a68eb2.png)
+   ![image](https://user-images.githubusercontent.com/42166489/109115799-93ccb200-7765-11eb-8c7b-944898a68eb2.png)
 
-     ![image](https://user-images.githubusercontent.com/42166489/109115876-ae069000-7765-11eb-9bf9-91759685c40e.png)
-
-     
-     
-     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-       
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-      
-      
-      
-      
-      
-      
-          
-  
-
+   ![image](https://user-images.githubusercontent.com/42166489/109115876-ae069000-7765-11eb-9bf9-91759685c40e.png)  
